@@ -35,14 +35,6 @@ $users = $db->query("SELECT * FROM users ORDER BY id DESC")->fetchAll();
             margin-right: 5px;
         }
 
-        /* a.edit {
-            background-color: #ffc107;
-        }
-
-        a.edit:hover {
-            background-color: #d39e00;
-        } */
-
         a:hover {
             background-color: #0056b3;
         }
