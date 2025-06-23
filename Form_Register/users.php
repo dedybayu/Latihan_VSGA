@@ -44,10 +44,11 @@ $users = $db->query("SELECT * FROM users ORDER BY id DESC")->fetchAll();
         }
 
         a.delete:hover {
-            background-color:rgb(145, 27, 39);
+            background-color: rgb(145, 27, 39);
         }
 
-        a.tambahUser, a.edit {
+        a.tambahUser,
+        a.edit {
             text-decoration: none;
             background: #28a745;
             color: white;
@@ -55,7 +56,8 @@ $users = $db->query("SELECT * FROM users ORDER BY id DESC")->fetchAll();
             border-radius: 4px;
         }
 
-        a.tambahUser:hover, a.edit:hover {
+        a.tambahUser:hover,
+        a.edit:hover {
             background: #1e7e34;
         }
     </style>
@@ -80,18 +82,24 @@ $users = $db->query("SELECT * FROM users ORDER BY id DESC")->fetchAll();
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($users as $user): ?>
+            <?php if (empty($users)): ?>
                 <tr>
-                    <td><?= $user['id']; ?></td>
-                    <td><?= $user['username']; ?></td>
-                    <td><?= $user['email']; ?></td>
-                    <td>
-                        <a href="edit_user.php?id=<?= $user['id']; ?>" class="edit">Edit</a>
-                        <a href="delete_user.php?id=<?= $user['id']; ?>" class="delete"
-                            onclick="return confirm('Yakin ingin menghapus?')">Delete</a>
-                    </td>
+                    <td colspan="4" style="text-align: center;">Tidak ada data.</td>
                 </tr>
-            <?php endforeach; ?>
+            <?php else: ?>
+                <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td><?= $user['id']; ?></td>
+                        <td><?= $user['username']; ?></td>
+                        <td><?= $user['email']; ?></td>
+                        <td>
+                            <a href="edit_user.php?id=<?= $user['id']; ?>" class="edit">Edit</a>
+                            <a href="delete_user.php?id=<?= $user['id']; ?>" class="delete"
+                                onclick="return confirm('Yakin ingin menghapus?')">Delete</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </tbody>
     </table>
 </body>
